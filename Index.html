@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUSH</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Montserrat', sans-serif;
+  color:#eaeaea;
+  background:#000000;
+  overflow-x:hidden;
+}
+
+/* Ultra Luxury Animated Background */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,215,0,0.05), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(212,175,55,0.04), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(198,168,79,0.05), transparent 50%);
+  animation:luxMove 18s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(120deg, transparent 40%, rgba(255,215,0,0.04) 50%, transparent 60%);
+  background-size:400px 100%;
+  animation:shineMove 14s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes luxMove{
+  0%{
+    transform:scale(1) translate(0px,0px);
+    filter:blur(0px);
+  }
+  50%{
+    transform:scale(1.15) translate(-40px,20px);
+    filter:blur(10px);
+  }
+  100%{
+    transform:scale(1.25) translate(40px,-30px);
+    filter:blur(20px);
+  }
+}
+
+@keyframes shineMove{
+  0%{ background-position:-400px; }
+  100%{ background-position:1200px; }
+}
+
+@keyframes backgroundPulse{
+  0%{ transform:scale(1); opacity:0.4; }
+  100%{ transform:scale(1.2); opacity:0.7; }
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%);
+  background-size:300px 100%;
+  animation:lightMove 12s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes lightMove{
+  0%{ background-position:-300px; }
+  100%{ background-position:1000px; }
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:60px;
+  padding:18px 0;
+  backdrop-filter:blur(25px);
+  background:rgba(8,8,8,0.55);
+  border-bottom:1px solid rgba(212,175,55,0.18);
+  z-index:1000;
+  transition:0.4s;
+}
+
+nav.scrolled{
+  background:rgba(0,0,0,0.85);
+  padding:15px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#fff;
+  font-size:12px;
+  letter-spacing:2px;
+  position:relative;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:1px;
+  background:#d4af37;
+  transition:0.4s;
+}
+
+nav a:hover::after{
+  width:100%;
+}
+
+header{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.logo{
+  font-family:'Playfair Display', serif;
+  font-size:130px;
+  letter-spacing:8px;
+  background:linear-gradient(120deg,#fff6cc 0%,#f5e6a8 20%,#d4af37 40%,#b8962e 50%,#f5e6a8 60%,#fff6cc 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 4px 15px rgba(0,0,0,0.8);
+  animation:fadeIn 2s cubic-bezier(.22,1,.36,1) forwards, metalShine 6s linear infinite;
+  opacity:0;
+}
+
+@keyframes metalShine{
+  0%{background-position:0% center;}
+  100%{background-position:200% center;}
+}
+
+@keyframes fadeIn{
+  0%{opacity:0; transform:translateY(40px) scale(0.95); letter-spacing:25px;}
+  60%{opacity:1; transform:translateY(-5px) scale(1.02); letter-spacing:15px;}
+  100%{opacity:1; transform:translateY(0) scale(1); letter-spacing:12px;}
+}
+}
+
+.section{
+  padding:140px 10%;
+  scroll-margin-top:120px;
+  opacity:0;
+  transform:translateY(80px) scale(0.98);
+  transition:1.2s cubic-bezier(.22,1,.36,1);
+  filter:blur(6px);
+}
+
+.section{
+  padding:160px 12%;
+  scroll-margin-top:120px;
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.4s cubic-bezier(.19,1,.22,1);
+}
+
+.section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.section h2{
+  font-family:'Playfair Display', serif;
+  font-size:32px;
+  margin-bottom:60px;
+  position:relative;
+}
+
+.section h2::after{
+  content:"";
+  position:absolute;
+  bottom:-20px;
+  left:0;
+  width:120px;
+  height:3px;
+  background:linear-gradient(90deg,transparent,#f5e6a8,#d4af37,#f5e6a8,transparent);
+  border-radius:4px;
+  box-shadow:0 0 25px rgba(212,175,55,0.7);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:40px;
+}
+
+.card{
+  position:relative;
+  padding:50px;
+  border:1px solid rgba(212,175,55,0.10);
+  background:#0a0a0a;
+  border-radius:30px;
+  box-shadow:0 40px 120px rgba(0,0,0,0.9);
+  transition:all 0.6s cubic-bezier(.19,1,.22,1);
+}
+
+.card:hover{
+  transform:translateY(-12px);
+  box-shadow:0 60px 160px rgba(0,0,0,1), 0 0 40px rgba(212,175,55,0.25);
+  border-color:rgba(245,230,168,0.4);
+}
+
+.card h3{
+  transition:0.4s cubic-bezier(.19,1,.22,1);
+}
+
+.card:hover h3{
+  letter-spacing:3px;
+  color:#f5e6a8;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent 30%, rgba(212,175,55,0.08), transparent 70%);
+  opacity:0;
+  transition:0.6s;
+}
+
+.card:hover::before{
+  opacity:1;
+}
+
+.card h3{
+  font-size:14px;
+  letter-spacing:2px;
+  margin-bottom:15px;
+}
+
+.card p{
+  font-size:12px;
+  color:#999;
+}
+
+footer{
+  text-align:center;
+  padding:80px 20px;
+  font-size:12px;
+  letter-spacing:3px;
+  border-top:1px solid #1a1a1a;
+  margin-top:80px;
+  color:#777;
+}
+
+
+
+/* Arabic Pattern Overlay */
+body{
+  position:relative;
+}
+
+body::marker{}
+
+.arabic-pattern{
+  position:fixed;
+  inset:0;
+  background-image:url('https://www.transparenttextures.com/patterns/arabesque.png');
+  opacity:0.05;
+  pointer-events:none;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+</style>
+</head>
+
+<body>
+<div class="arabic-pattern"></div>
+
+
+<nav>
+  <a href="#men">MEN</a>
+  <a href="#women">WOMEN</a>
+  <a href="#arabes">ARABES</a>
+  <a href="#frances">FRANCES</a>
+</nav>
+
+<header>
+  <div class="logo">BLUSH</div>
+</header>
+
+<section class="section" id="men">
+  <h2>Men</h2>
+  <div class="grid">
+    <div class="card"><h3>BLACK LABEL x 80ml.</h3><p>Inspirado en (ETIQUETA NEGRA)</p></div>
+<div class="card"><h3>HORSE BLACK x 80ml.</h3><p>Inspirado en (POLO BLACK - R. LAUREN)</p></div>
+<div class="card"><h3>HORSE RED INTENSE x 80ml.</h3><p>Inspirado en (POLO RED INTENSE- R. LAUREN)</p></div>
+<div class="card"><h3>ORCHIDEE NOIR x 100ml</h3><p>Inspirado en (BLACK ORCHID - TOM FORD)</p></div>
+<div class="card"><h3>HORSE x 90ml.</h3><p>Inspirado en (POLO - R. LAUREN)</p></div>
+<div class="card"><h3>HORSE RED x 90ml.</h3><p>Inspirado en (POLO RED - R. LAUREN)</p></div>
+<div class="card"><h3>HORSE BLUE x 90ml.</h3><p>Inspirado en (POLO BLUE - R. LAUREN)</p></div>
+<div class="card"><h3>D'ORGEVAL CODE MEN x 100ml.</h3><p>Inspirado en (ARMANI CODE MEN - ARMANI)</p></div>
+<div class="card"><h3>HYDO x 100ml.</h3><p>Inspirado en (HUGO- HUGO BOSS)</p></div>
+<div class="card"><h3>ORIXA POUR HOMME x 100ml.</h3><p>Inspirado en (LEAU DISSEY - MIYAKE)</p></div>
+<div class="card"><h3>JENKO x 100ml.</h3><p>Inspirado en (KENZO BY KENZO)</p></div>
+<div class="card"><h3>YD ONE x 100ml.</h3><p>Inspirado en (CK ONE)</p></div>
+<div class="card"><h3>YD ONE FOR ALL x 100ml.</h3><p>Inspirado en (CK ONE EVERYONE)</p></div>
+<div class="card"><h3>ACQUA DI YDO x 100ml.</h3><p>Inspirado en (ACQUA DI GIO - ARMANI)</p></div>
+<div class="card"><h3>GH CLASSIC x 100ml.</h3><p>Inspirado en (CAROLINA HERRERA MEN)</p></div>
+<div class="card"><h3>CELSIUS x 100ml.</h3><p>Inspirado en (FAHRENHEIT)</p></div>
+<div class="card"><h3>HYDO RED x 100ml.</h3><p>Inspirado en (HUGO RED - HUGO BOSS)</p></div>
+<div class="card"><h3>HYDO JUST DIFFERENT x 100ml.</h3><p>Inspirado en (HUGO JUST DIFFERENT- H. BOSS)</p></div>
+<div class="card"><h3>BLACK YD x 100ml.</h3><p>Inspirado en (BLACK XS - PACO RABANNE)</p></div>
+<div class="card"><h3>WILDEST x 100ml.</h3><p>Inspirado en (SAUVAGE - DIOR)</p></div>
+<div class="card"><h3>WILDEST ELIXIR x 100ml.</h3><p>Inspirado en (SAUVAGE ELIXIR – DIOR)</p></div>
+<div class="card"><h3>XAVIER ROUGE x 100ml.</h3><p>Inspirado en (XERYUS ROUGE - GIVENCHY)</p></div>
+<div class="card"><h3>GH MEN x 100ml.</h3><p>Inspirado en (CH C. HERRERA)</p></div>
+<div class="card"><h3>GH PRIVE x 100ml</h3><p>Inspirado en (CH PRIVE - CAROLINA HERRERA)</p></div>
+<div class="card"><h3>PURE YD x 100ml.</h3><p>Inspirado en (PURE XS - PACO RABANNE)</p></div>
+<div class="card"><h3>PURE YD NIGHT x 100ml.</h3><p>Inspirado en (PURE XS NIGHT - PACO RABANNE)</p></div>
+<div class="card"><h3>YD ANGE x 100ml.</h3><p>Inspirado en (ANGEL - THIERRY MUGLER)</p></div>
+<div class="card"><h3>SHAPIRO x 100ml</h3><p>Inspirado en (OUD SAPHIR - ATELIER)</p></div>
+<div class="card"><h3>BLACK YD APHRODISIAQUE x 80ml.</h3><p>Inspirado en (BLACK XS APHRODISIAQUE- P.R.)</p></div>
+<div class="card"><h3>BLACK YD L'ELIXIR x 100ml.</h3><p>Inspirado en (BLACK XS L'EXCES- P.RABANNE)</p></div>
+<div class="card"><h3>PARISMANIA POUR HOMME x 100ml.</h3><p>Inspirado en (SCANDAL POUR HOMME – JEAN PAUL GAULTIER)</p></div>
+<div class="card"><h3>PARISMANIA ABSOLU x 100ml.</h3><p>Inspirado en (SCANDAL ABSOLU - JEAN PAUL GAULTIER)</p></div>
+<div class="card"><h3>FCKNG FASHION x 100 ml</h3><p>Inspirado en (FUCKING FABULOUS - TOM FORD)</p></div>
+<div class="card"><h3>OUD GOOD x 100 ml</h3><p>Inspirado en (OUD WOOD - TOM FORD)</p></div>
+<div class="card"><h3>NEROLI PORTOBELLO x 100ml. UNISEX</h3><p>Inspirado en (NEROLI PORTOFINO - TOM FORD)</p></div>
+<div class="card"><h3>COSTA AZUL x 100ml. UNISEX</h3><p>Inspirado en (COSTA AZURRA - TOM FORD)</p></div>
+<div class="card"><h3>YD12 MEN x 100ml.</h3><p>Inspirado en (212 MEN - C. HERRERA)</p></div>
+<div class="card"><h3>YD12 SEXY MEN x 100ml.</h3><p>Inspirado en (212 SEXY MEN - C. HERRERA)</p></div>
+<div class="card"><h3>G. MILLONAIRE MONEY x 100ml</h3><p>Inspirado en (ONE MILLION INTENSE)</p></div>
+<div class="card"><h3>G. MILLIONAIRE PRIVE x 100ml.</h3><p>Inspirado en (ONE MILLION PRIVE)</p></div>
+<div class="card"><h3>G. MILLIONAIRE LUCKIEST x100ml.</h3><p>Inspirado en (ONE MILLION LUCKY)</p></div>
+<div class="card"><h3>YD12 VIP MEN x 110ml.</h3><p>Inspirado en (212 VIP MEN - C. HERRERA)</p></div>
+<div class="card"><h3>YD12 VIP NIGHT CLUB MEN x 110ml.</h3><p>Inspirado en (212 VIP CLUB MEN - C. HERRERA)</p></div>
+<div class="card"><h3>YD12 VIP BLACK MEN x 110ml.</h3><p>Inspirado en (212 VIP BLACK MEN - C. HERRERA)</p></div>
+<div class="card"><h3>ADÁN LE PARFUM x 130ml.</h3><p>Inspirado en (LE BEAU LE PARFUM – JEAN PAUL GAULTIER)</p></div>
+<div class="card"><h3>YD12 SKATE MEN x 85ml.</h3><p>Inspirado en (212 MEN HEROES - C. HERRERA)</p></div>
+<div class="card"><h3>OPTIMUS x 100ml.</h3><p>Inspirado en (PHANTOM - PACO RABANNE)</p></div>
+<div class="card"><h3>OPTIMUS LEGION x 100ml.</h3><p>Inspirado en (PHANTOM LEGION - PACO RABANNE)</p></div>
+<div class="card"><h3>OPTIMUS BLACK x 100ml.</h3><p>Inspirado en (PHANTOM BLACK PARFUM – PACO RABANNE)</p></div>
+<div class="card"><h3>ADVENTURE x 120ml.</h3><p>Inspirado en (AVENTUS – CREED)</p></div>
+<div class="card"><h3>GRAND VICTORIOUS x 100ml.</h3><p>Inspirado en (INVICTUS GOLD- PACO RABANNE)</p></div>
+<div class="card"><h3>VICTORIOUS AQUAx 100ml.</h3><p>Inspirado en (INVICTUS AQUA- PACO RABANNE)</p></div>
+<div class="card"><h3>VICTORIOUS x 100ml.</h3><p>Inspirado en (Especial) (INVICTUS - PACO RABANNE)</p></div>
+<div class="card"><h3>VICTORIOUS INTENSE x 100ml.</h3><p>Inspirado en (INVICTUS INTENSE - PACO RABANNE)</p></div>
+<div class="card"><h3>VICTORIOUS V x 100ml.</h3><p>Inspirado en (INVICTUS VICTORY – PACO RABANNE)</p></div>
+<div class="card"><h3>VICTORIOUS ONYX x 100ml</h3><p>Inspirado en (INVICTUS ONYX - PACO RABANNE)</p></div>
+<div class="card"><h3>G. MILLIONAIRE GOLD x 100ml.</h3><p>Inspirado en (ONE MILLION)</p></div>
+<div class="card"><h3>GOOD BOY COBALT x 100ml.</h3><p>Inspirado en (BAD BOY COBALT – CAROLINA HERRERA)</p></div>
+<div class="card"><h3>GOOD BOY PARFUM x 100ml</h3><p>Inspirado en (BAD BOY PARFUMS - CAROLINA HERRERA)</p></div>
+<div class="card"><h3>GOOD BOY x 100ml</h3><p>Inspirado en (BAD BOY - CAROLINA HERRERA)</p></div>
+<div class="card"><h3>PIPE DREAM x 35ml.</h3><p>Inspirado en (CONCENTRADO)</p></div>
+<div class="card"><h3>PIPE DREAM OUD x 35ml.</h3><p>Inspirado en (CONCENTRADO)</p></div>
+  </div>
+</section>
+
+<section class="section" id="women">
+  <h2>Women</h2>
+  <div class="grid">
+    <div class="card"><h3>LOVELY JENKO x 70ml.</h3><p>Inspirado en (KENZO AMOUR)</p></div>
+<div class="card"><h3>ORIXA x 50ml.</h3><p>Inspirado en (LEAU DISSEY - MIYAKE)</p></div>
+<div class="card"><h3>GH L'EAU x 50ml.</h3><p>Inspirado en (CH L'EAU)</p></div>
+<div class="card"><h3>GH x 50ml.</h3><p>Inspirado en (CH - C. HERRERA)</p></div>
+<div class="card"><h3>SPELL'S NIGHT x 80ml.</h3><p>Inspirado en (HALLOWEEN - JESUS DEL POZO)</p></div>
+<div class="card"><h3>SPELL'S NIGHT BLUE DROP x 80ml.</h3><p>Inspirado en (HALLOWEEN BLUE DROP- J DEL P)</p></div>
+<div class="card"><h3>YD&DG x 75ml.</h3><p>Inspirado en (DOLCE & GABBANA)</p></div>
+<div class="card"><h3>M. M. EAU MY GOLD x 75ml.</h3><p>Inspirado en (L. MILLION E.M.G. - RABANNE)</p></div>
+<div class="card"><h3>SUTIL x 75ml.</h3><p>Inspirado en (HEIRESS - PARIS HILTON)</p></div>
+<div class="card"><h3>PLAYING x 100 ml.</h3><p>Inspirado en (PLAY - GIVENCHI)</p></div>
+<div class="card"><h3>LOVELY GAME x 75ml</h3><p>Inspirado en (JEU D'AMOUR - KENZO)</p></div>
+<div class="card"><h3>LOVELY GAME ELIXIR x 75ml</h3><p>Inspirado en (JEU D'AMOUR L'ELIXIR - KENZO)</p></div>
+<div class="card"><h3>D'ORGEVAL BLUE x 100ml.</h3><p>Inspirado en (LIGHT BLUE- D. GABBANA)</p></div>
+<div class="card"><h3>YVES D'ORGEVAL CLASSIC x 100ml.</h3><p>Inspirado en ()</p></div>
+<div class="card"><h3>YD'LICIOUS x 100ml</h3><p>Inspirado en (Be Delicious - Donna Karan)</p></div>
+<div class="card"><h3>YD'LICIOUS FRESH PINK x 100ml</h3><p>Inspirado en (BE DELICIOUS FRESH BLOSSOM – D KARAN)</p></div>
+<div class="card"><h3>HVNGARY x 100ml</h3><p>Inspirado en (BVLGARI FEMME - BVLGARI)</p></div>
+<div class="card"><h3>NADINE x 100ml</h3><p>Inspirado en (NINA - NINA RICCI)</p></div>
+<div class="card"><h3>MOONLIGHT x 100ml</h3><p>Inspirado en (LUNA - NINA RICCI)</p></div>
+<div class="card"><h3>AD LE SECRET ELIXIR x 100ml.</h3><p>Inspirado en (AD LE SECRET ELIXIR- GIVENCHY)</p></div>
+<div class="card"><h3>AD LE SECRET x 100ml.</h3><p>Inspirado en (ANGE OU DEMON LE SECRET- GIVENCHY)</p></div>
+<div class="card"><h3>AD x 100ml.</h3><p>Inspirado en (ANGE OU DEMON - GIVENCHY)</p></div>
+<div class="card"><h3>NADINE ELIXIR x 100ml.</h3><p>Inspirado en (NINA L'ELIXIR - NINA RICCI)</p></div>
+<div class="card"><h3>NADINE L'EAU 100ml.</h3><p>Inspirado en (NINA L'EAU - NINA RICCI)</p></div>
+<div class="card"><h3>YD IRRESISTIBLE x 100ml.</h3><p>Inspirado en (VERY IRRESISTIBLE)</p></div>
+<div class="card"><h3>YD IRRESISTIBLE SENSUALx 80ml.</h3><p>Inspirado en (VERY IRRESISTIBLE SENSUAL)</p></div>
+<div class="card"><h3>L'INTERVIEUX x 100ml</h3><p>Inspirado en (L'INTERDIT - GIVENCHY)</p></div>
+<div class="card"><h3>L'INTERVIEUX PARFUM ROUGE x 100</h3><p>Inspirado en (L'INTERDIT ROUGE PARFUM - GIVENCHY)</p></div>
+<div class="card"><h3>MISS MILLIONAIRE x 100ml</h3><p>Inspirado en (LADY MILLION - RABANNE)</p></div>
+<div class="card"><h3>MISS MILLIONAIRE PRIVE x 90ml</h3><p>Inspirado en (LADY MILLION PRIVE- RABANNE)</p></div>
+<div class="card"><h3>MISS MILLIONAIRE FABULOUS x 100ml</h3><p>Inspirado en (LADY MILLION FABULOUS – P RABANNE)</p></div>
+<div class="card"><h3>YD ANGEx 100ml.</h3><p>Inspirado en (ANGEL - THIERRY MUGLER)</p></div>
+<div class="card"><h3>D'ORGEVAL CODE x 80ml</h3><p>Inspirado en (ARMANI CODE)</p></div>
+<div class="card"><h3>YD FLEUR x 100ml.</h3><p>Inspirado en (FLOWER - KENZO)</p></div>
+<div class="card"><h3>PRINTEMPS BOUQUET x 100ml.</h3><p>Inspirado en (FLOWER POPPY BOUQUET - KENZO)</p></div>
+<div class="card"><h3>YD FLEUR ELIXIR x 100ml.</h3><p>Inspirado en (FLOWER L'ELIXIR - KENZO)</p></div>
+<div class="card"><h3>LUMIERE x 110ml.</h3><p>Inspirado en (J'ADORE - CRISTIAN DIOR)</p></div>
+<div class="card"><h3>BAISER D'AMOUR x 90ml</h3><p>Inspirado en (AMOR AMOR - CACHAREL)</p></div>
+<div class="card"><h3>MIU MIU x 60 ml.</h3><p>Inspirado en (RICCI RICCI - NINA RICCI)</p></div>
+<div class="card"><h3>HAI x 100ml.</h3><p>Inspirado en (ARMANI - SI)</p></div>
+<div class="card"><h3>LUMIERE BLACK x 65ml.</h3><p>Inspirado en (J'ADORE BLACK - CRISTIAN DIOR)</p></div>
+  </div>
+</section>
+
+<section class="section" id="arabes">
+  <h2>Arabes</h2>
+  <div class="grid">
+    <div class="card"><h3>GOLD OUD</h3><p>Inspirado en (Al Haramain Amber Gold Oud)</p></div>
+<div class="card"><h3>GREAT OUD</h3><p>Inspirado en (Badee al oud for Glory - Lattafa)</p></div>
+<div class="card"><h3>GREAT MUSK</h3><p>Inspirado en (Badee al oud Honor- Lattafa)</p></div>
+<div class="card"><h3>CANDY</h3><p>Inspirado en (Yara Candy- Lattafa)</p></div>
+<div class="card"><h3>KUNYAK</h3><p>Inspirado en (Khamrah- Lattafa)</p></div>
+<div class="card"><h3>SHEIK BOURBON</h3><p>Inspirado en (Asad Bourbon- Lattafa)</p></div>
+<div class="card"><h3>NAXUS</h3><p>Inspirado en (Naxos - Xerjoff)</p></div>
+<div class="card"><h3>PURE HERBAL</h3><p>Inspirado en (Erba Pura - Xerjoff)</p></div>
+<div class="card"><h3>TURIN 21</h3><p>Inspirado en (Torino 21 - Xerjoff)</p></div>
+<div class="card"><h3>THE NIGHT'S BEAST INTENSE MAN</h3><p>Inspirado en (Club de Nuit Intense Man - Armaf)</p></div>
+  </div>
+</section>
+
+<section class="section" id="frances">
+  <h2>Frances</h2>
+  <div class="grid">
+    <div class="card"><h3>CRIBAGGE ROUGE 540</h3><p>Inspirado en (Baccarat Rouge 540 - Maison Francis Kurkdjian)</p></div>
+<div class="card"><h3>CLAYTON</h3><p>Inspirado en (Layton - Marly)</p></div>
+<div class="card"><h3>DALILAH</h3><p>Inspirado en (Delina - Marly)</p></div>
+  </div>
+</section>
+
+<footer>
+  BLUSH — Luxury Fragrance House
+</footer>
+
+<script>
+
+const sections = document.querySelectorAll(".section");
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{threshold:0.2});
+
+sections.forEach(section=>{
+  observer.observe(section);
+});
+
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("nav");
+  nav.classList.toggle("scrolled", window.scrollY > 50);
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>
